@@ -6,6 +6,7 @@ tasks:
       command: |
           export XSB_DIR=$(pwd)/XSB
           export MULVALROOT=$(pwd)/mulval
+          gp env -u PATH
           gp env PATH=$PATH:$XSB_DIR/bin:$MULVALROOT/bin:$MULVALROOT/utils
 
     - name: Install XSB
