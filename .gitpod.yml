@@ -16,6 +16,7 @@ tasks:
     - name: Download & Install MulVal
       init: |
           wget https://www.arguslab.org/software/mulval_1_1.tar.gz
+          tar xzf mulval_1_1.tar.gz
           gp sync-await xsb
           eval $(gp env -e)
           cd mulval
