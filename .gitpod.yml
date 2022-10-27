@@ -2,16 +2,19 @@ image:
     file: .gitpod.Dockerfile
 
 tasks:
+    - name: Set ENV variables
+      command: |
+          export XSB_DIR=$(pwd)/XSB
+          export MULVALROOT=$(pwd)/mulval
+          gp env PATH=$PATH:$XSB_DIR/bin:$MULVALROOT/bin:$MULVALROOT/utils
+
     - name: Install XSB
       init: |
           tar xzf XSB-5.0.tar.gz
           cd XSB/build
           ./configure
           ./makexsb
-      command: |
-          export XSB_DIR=$(pwd)/XSB
-          gp env PATH=$PATH:$XSB_DIR/bin
-          gp sync-done xsb
+      command: gp sync-done xsb
 
     - name: Download & Install MulVal
       init: |
@@ -21,7 +24,4 @@ tasks:
           eval $(gp env -e)
           cd mulval
           make
-      command: |
-          eval $(gp env -e)
-          export MULVALROOT=$(pwd)/mulval
-          gp env PATH=$PATH:$MULVALROOT/bin:$MULVALROOT/utils
+      command: eval $(gp env -e)
